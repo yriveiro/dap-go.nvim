@@ -15,7 +15,12 @@ Golang with Delve over Debug Adapter Protocol for [Neovim](https://neovim.io/) (
 
 ## Getting Started
 
-TDB
+This section should guide you on how to add the extention to `nvim-dap`.
+
+### Dependencies
+
+* [Neovim (v.5.1)](https://github.com/neovim/neovim/releases/tag/v0.5.1) or higher.
+* [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) for all the stuff I don't want to write twice.
 
 ## Usage
 
