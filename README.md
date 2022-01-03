@@ -8,12 +8,18 @@ Golang with Delve over Debug Adapter Protocol for [Neovim](https://neovim.io/) (
 
 # Table of Content
 
+- [Features](#features)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
+- [Installation](#installation)
 - [Contributing](#contributing)
 - [Changelog](https://github.com/yriveiro/dap-go.nvim/blob/master/doc/dap_go_changelog.md)
 - [Acknowledgement](#Acknowledgement)
 - [License](#license)
+
+## Features
+
+* Load `dap` configurations from a file.
 
 ## Getting Started
 
@@ -25,15 +31,43 @@ This section should guide you on how to add the extention to `nvim-dap`.
 * [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) for all the stuff I don't want to write twice.
 * [Delve](https://github.com/go-delve/delve)
 
+### Suggested Dependencies
+
+* [telescope-dap](https://github.com/nvim-telescope/telescope-dap.nvim) to browse the `dap` configurations.
+* [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) for more user friendly DAP user interface.
+
+## Installation
+
+Using [vim-plug](https://github.com/junegunn/vim-plug)
+
+```viml
+Plug 'nvim-lua/plenary.nvim'
+Plug 'yriveiro/dap-go.nvim'
+```
+
+Using [dein](https://github.com/Shougo/dein.vim)
+
+```viml
+call dein#add('nvim-lua/plenary.nvim')
+call dein#add('yriveiro/dap-go.nvim')
+```
+
+Using [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
+```lua
+use {
+  'yriveiro/dap-go.nvim',
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
+```
+
 ## Usage
 
 TBD
 
 ## Contributing
 
-TBD
-
-## Changelog
+All contributions are welcome! Just open a pull request. Please read CONTRIBUTING.md
 
 ## Acknowledgement
 
