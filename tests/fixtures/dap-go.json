@@ -1,0 +1,28 @@
+{
+  "test 1": {
+    "type": "go",
+    "name": "Test One",
+    "request": "launch",
+    "program": "${file}",
+    "options": {
+      "env": {
+        "FOO": "bar"
+      }
+    }
+  },
+  "Test 2": {
+    "type": "go",
+    "name": "Test 2",
+    "request": "launch",
+    "program": "${file}",
+    "args": [
+      "--log",
+      "trace"
+    ],
+    "options": {
+      "env": {
+        "BAR": "FOO"
+      }
+    }
+  }
+}

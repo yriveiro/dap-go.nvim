@@ -1,69 +1,73 @@
-local util = require 'dap-go.util'
-local settings = require 'dap-go.settings'
+local util = require('dap-go.util')
+local config = require('dap-go.config')
+local env = require('dap-go.env')
 
+local uv = vim.loop
+local dap = util.load_module('dap')
+local job = util.load_module('plenary.job')
+
+---@class DapGo
 local M = {}
 
-M.settings = settings.set
+local function on_stdout()
+  --- @note on_stdout(error: string, data: string, self? Job)
+  return function(err, data)
+    assert(not err, err)
+    if data then
+      vim.schedule(function()
+        require('dap.repl').append(data)
+      end)
+    end
+  end
+end
+
+local function on_exit()
+  --- @note on_exit(self, code: number, signal: number)
+  return function(_, code)
+    if code ~= 0 then
+      print('dlv exited with code', code)
+    end
+  end
+end
+
+local function on_stderr()
+  --- @note on_stderr(error: string, data: string, self? Job)
+  return function() end
+end
 
 local function setup_adapter()
-  --local dap = util.load_module('dap')
-  --local plenary = util.load_module('plenary')
+  dap.adapters.go = function(cb, configuration)
+    local host = configuration.host or '127.0.0.1'
+    local port = configuration.port or '38697'
+    local addr = string.format('%s:%s', host, port)
 
-  --dap.adapters.go = function(cb, configurations)
-    --local host = configurations.host or "127.0.0.1"
-    --local port = configurations.port or "38697"
-    --local addr = string.format("%s:%s", host, port)
+    if configuration.options.env then
+      env.extend(configuration.options.env)
+    end
 
-    --if configurations.options.env then
-      --local _global_env = vim.fn.environ()
-      --print(vim.inspect(_global_env))
-      --env = vim.tbl_extend("keep", configurations.options.env, _global_env)
-    --end
+    job
+      :new({
+        command = 'dlv',
+        env = env.current,
+        cwd = uv.cwd(),
+        args = { 'dap', '-l', addr },
+        on_exit = on_exit(),
+        on_stdout = on_stdout(),
+        on_stderr = on_stderr(),
+      })
+      :start()
 
-    --plenary.job.Job:new({
-      --command = 'dlv',
-      --env = env,
-      --cwd = vim.loop.cwd(),
-      --args = vim.tbl_flatten{"dap", "-l", addr, configurations.args or {}},
-      --on_exit = function(_, code)
-        --if code ~=0 then
-          --print('dlv exited with code', code)
-        --end
-      --end,
-      --on_stdout =function(err, data)
-        --assert(not err, err)
-
-        --if data then
-          --vim.schedule(function() require('dap.repl').append(data) end)
-        --end
-      --end,
-      --on_stderr =function(err, data)
-        --assert(not err, err)
-
-        --if data then
-          --vim.schedul(function() require('dap.repl').append(data) end)
-        --end
-      --end,
-    --}):start()
-
-    --vim.defer_fn(function()
-      --cb({type = "server", host = "127.0.0.1", port = port})
-    --end, 100)
-  --end
+    vim.defer_fn(function()
+      cb({ type = 'server', host = host, port = port })
+    end, 100)
+  end
 end
 
-local function setup_configuration(dap)
-  dap.configurations.go = M.settings.configurations
-end
+function M.setup(options)
+  config.setup(options)
 
-function M.setup(opts)
-  print('hola')
-  M.settings(opts)
-
-  util.parse_custom_configurations(vim.loop.fs_realpath('.'))
-
+  dap.configurations.go = config.dap.configurations
   setup_adapter()
-  setup_configuration()
 end
 
 return M
