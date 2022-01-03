@@ -63,7 +63,21 @@ use {
 
 ## Usage
 
-TBD
+```lua
+require('dap-go').setup()
+```
+
+If you want to use a json file to hold configurations for the debugger you need
+to enable the external config feature.
+
+```lua
+require('dap-go').setup({
+  external_config = {
+    enable = true,
+    path = require('dap-go.util').git_root(uv.fs_realpath('.')) .. '/dap-go.json'
+  }
+})
+```
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 local M = {}
 
---- @class Environment
+---@class Environment
 M._env = vim.fn.environ()
 M.extend = function(t)
   assert(type(t) == 'table', 'input must be a table')

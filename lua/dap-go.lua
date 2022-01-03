@@ -10,7 +10,7 @@ local job = util.load_module('plenary.job')
 local M = {}
 
 local function on_stdout()
-  --- @note on_stdout(error: string, data: string, self? Job)
+  ---@note on_stdout(error: string, data: string, self? Job)
   return function(err, data)
     assert(not err, err)
     if data then
@@ -22,7 +22,7 @@ local function on_stdout()
 end
 
 local function on_exit()
-  --- @note on_exit(self, code: number, signal: number)
+  ---@note on_exit(self, code: number, signal: number)
   return function(_, code)
     if code ~= 0 then
       print('dlv exited with code', code)
@@ -31,7 +31,7 @@ local function on_exit()
 end
 
 local function on_stderr()
-  --- @note on_stderr(error: string, data: string, self? Job)
+  ---@note on_stderr(error: string, data: string, self? Job)
   return function() end
 end
 

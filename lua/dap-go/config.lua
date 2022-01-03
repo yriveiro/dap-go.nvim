@@ -4,13 +4,17 @@ local uv = vim.loop
 
 local M = {}
 
---- @class Options
---- @type table <string, any>
+---@class Options
+---@type table <string, any>
 local defaults = {
   external_config = {
+    --- Enable external config
     enabled = false,
+    --- File with the config definitions.
     path = require('dap-go.util').git_root(uv.fs_realpath('.')) .. '/dap-go.json',
   },
+
+  --- nvim-dap configuration for go.
   dap = {
     configurations = {
       {
@@ -30,7 +34,7 @@ local defaults = {
   },
 }
 
---- @type Options
+---@type Options
 M._options = {}
 
 --- Load configurations from file and merge it with current ones.
@@ -47,8 +51,8 @@ local function load_dap_configurations_from_file()
   end
 end
 
---- @param options table Custom config to set.
---- @return Options
+---@param options table Custom config to set.
+---@return Options
 function M.setup(options)
   M._options = vim.tbl_deep_extend('force', {}, defaults, options or {})
 
