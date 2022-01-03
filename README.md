@@ -4,7 +4,8 @@ Golang with Delve over Debug Adapter Protocol for [Neovim](https://neovim.io/) (
 
 # What is DAP Go
 
-`dap-go.nvim` os an extension for [nvim-dap](https://github.com/mfussenegger/nvim-dap) to configurate Go with Delve debugger.
+`dap-go.nvim` is an extension for [nvim-dap](https://github.com/mfussenegger/nvim-dap)
+to configurate Go with Delve debugger.
 
 # Table of Content
 
