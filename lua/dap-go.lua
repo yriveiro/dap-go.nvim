@@ -48,7 +48,7 @@ local function setup_adapter()
     job
       :new({
         command = 'dlv',
-        env = env.current,
+        env = env.dump(),
         cwd = uv.cwd(),
         args = { 'dap', '-l', addr },
         on_exit = on_exit(),
