@@ -1,5 +1,6 @@
-local with = require('plenary.context_manager').with
 local open = require('plenary.context_manager').open
+local with = require('plenary.context_manager').with
+local util = require('dap-go.util')
 local uv = vim.loop
 
 local M = {}
@@ -44,9 +45,11 @@ local function load_dap_configurations_from_file()
   end)
 
   if result then
-    local c = vim.fn.json_decode(result)
-    for _, v in pairs(c) do
-      table.insert(M.dap.configurations, v)
+    local ok, c = util.json_decode(result)
+    if ok then
+      for _, v in pairs(c) do
+        table.insert(M.dap.configurations, v)
+      end
     end
   end
 end
