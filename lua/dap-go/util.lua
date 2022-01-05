@@ -1,33 +1,33 @@
+---@brief [[
+--- This class provides common functions used in dap-go extension.
+---@brief ]]
 ---@tag dap-go.util
 
----@brief [[
---- Provides common utility function.
----@brief ]]
---
---- @class Util
-local M = {}
+---@class Util @Collection of utility fuctions.
+local util = {}
 
---- Load a module or fail if the module doesn't exists
----@param mname string: The name of the module
+--- Load a module or fail if the module doesn't exists.
+---@param name string: Name of the module.
 ---@return table The module.
-function M.load_module(mname)
-  local ok, module = pcall(require, mname)
-  assert(ok, string.format('dap-go dependency error: %s not installed', mname))
+function util.load_module(name)
+  local ok, module = pcall(require, name)
+  assert(ok, string.format('dap-go dependency error: %s not installed', name))
   return module
 end
 
----@param fname string: The name of the current file
----@return string: The path of the git root
----@return string: The git root of fname file
-function M.git_root(fname)
-  return require('lspconfig.util').root_pattern('.git')(fname)
+--- Gets the git root of the project base on a file from it.
+---@param name string: Name of the current file to start the search from.
+---@return string: Path of the git root.
+function util.git_root(name)
+  return require('lspconfig.util').root_pattern('.git')(name)
 end
 
---- Encodes to JSON.
+--- Encodes string data to JSON.
+---@usage
 ---@note borrowed from https://github.com/tjdevries/tree-sitter-lua/blob/master/lua/nlsp/rpc.lua
----@param data table: Data to encode
----@returns string: Encoded object
-function M.json_encode(data)
+---@param data table: Data to encode.
+---@return string: Encoded JSON object.
+function util.json_encode(data)
   local status, result = pcall(vim.fn.json_encode, data)
   if status then
     return true, result
@@ -36,10 +36,10 @@ function M.json_encode(data)
   end
 end
 
---- Decodes from JSON.
----@param data string: Data to decode
----@returns table: Decoded JSON object
-function M.json_decode(data)
+--- Decodes data from JSON.
+---@param data string: Data to decode.
+---@return table: Decoded JSON object.
+function util.json_decode(data)
   local status, result = pcall(vim.fn.json_decode, data)
   if status then
     return true, result
@@ -47,4 +47,5 @@ function M.json_decode(data)
     return nil, result
   end
 end
-return M
+
+return util
