@@ -1,12 +1,8 @@
--- Setup dap-go with defaults
-require('dap-go').setup()
-
 local docgen = require('docgen')
 
 local docs = {}
 
 docs.test = function()
-  -- TODO: Fix the other files so that we can add them here.
   local input_files = {
     './lua/dap-go.lua',
     './lua/dap-go/config.lua',
