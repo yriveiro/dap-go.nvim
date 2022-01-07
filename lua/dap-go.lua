@@ -1,3 +1,4 @@
+---@tag dap-go.nvim
 local util = require('dap-go.util')
 local config = require('dap-go.config')
 local env = require('dap-go.env')
@@ -6,8 +7,24 @@ local uv = vim.loop
 local dap = util.load_module('dap')
 local job = util.load_module('plenary.job')
 
----@class DapGo
-local M = {}
+---@brief [[
+--- dap-go.nvim is an extension for `nvim-dap` plugin that configures the usage
+--- of Golang debugging over Delve.
+---
+--- Getting started with dap-go:
+---   1. Put a `require("dap-go").setup() call somewhere in your neovim config.
+---   2. Read |dap-go.setup| to check what config keys are available and what you can put inside the setup call
+---   3. Profit
+---
+--- <pre>
+--- To find out more:
+--- https://github.com/yriveiro/dap-go.nvim
+---
+---   :h dap-go.setup
+--- </pre>
+---@brief ]]
+
+local dapgo = {}
 
 local function on_stdout()
   ---@note on_stdout(error: string, data: string, self? Job)
@@ -63,11 +80,45 @@ local function setup_adapter()
   end
 end
 
-function M.setup(options)
+--- Setup function to be run by user. Configures the defaults, pickers and
+--- extensions of dap-go.
+---
+--- Usage:
+--- <code>
+--- require('dap-go').setup({
+--- external_config = {
+---   --- Enable external config
+---   enabled = false,
+---   --- File with the config definitions.
+---   path = require('dap-go.util').git_root(uv.fs_realpath('.')) .. '/dap-go.json',
+--- },
+---
+--- --- nvim-dap configuration for go.
+--- dap = {
+---   configurations = {
+---     {
+---       type = 'go',
+---       name = 'Debug',
+---       request = 'launch',
+---       program = '${file}',
+---     },
+---     {
+---       type = 'go',
+---       name = 'Attach',
+---       mode = 'local',
+---       request = 'attach',
+---       processId = require('dap.utils').pick_process,
+---     },
+---   },
+--- },
+---})
+--- </code>
+---@param options table: Configuration opts. Keys: external_config, dap
+function dapgo.setup(options)
   config.setup(options)
 
   dap.configurations.go = config.dap.configurations
   setup_adapter()
 end
 
-return M
+return dapgo

@@ -19,8 +19,6 @@ function mt:__index(k)
   return config._options[k]
 end
 
-setmetatable(config, mt)
-
 local defaults = {
   external_config = {
     --- Enable external config
@@ -108,5 +106,7 @@ function config.setup(options)
     load_dap_configurations_from_file()
   end
 end
+
+setmetatable(config, mt)
 
 return config
