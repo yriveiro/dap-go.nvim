@@ -64,7 +64,6 @@ local function load_dap_configurations_from_file()
   end
 end
 
-
 --- Setup function, this function is internally called by |dap-go.setup()| and
 --- depending on the configuration will load an external config file.
 ---

@@ -19,7 +19,6 @@ function mt:__newindex(k, v)
   env._env[k] = v
 end
 
-
 --- Extends the current enviroment with new data.
 ---@param t table: extended enviroment variables to merge with current ones.
 function env.extend(t)
