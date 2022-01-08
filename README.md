@@ -80,6 +80,27 @@ require('dap-go').setup({
 })
 ```
 
+An example of the `dap-go.json` file.
+
+```json
+{
+  "Custom config": {
+    "type": "go",
+    "name": "Debug custom",
+    "request": "launch",
+    "program": "${file}",
+    "args": [
+      "--foo",
+      "bar"
+    ],
+    "options": {
+      "env": {
+        "FOO": "bar"
+      }
+    }
+  }
+}
+```
 ## Contributing
 
 All contributions are welcome! Just open a pull request. Please read CONTRIBUTING.md
