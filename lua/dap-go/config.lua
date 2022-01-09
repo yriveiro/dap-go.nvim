@@ -9,7 +9,7 @@ local uv = vim.loop
 ---
 ---@brief ]]
 
----@class Config @Expose Configures the |dap-go.nvim| extension
+---@class Config @Expose configuration for the |dap-go.nvim| extension
 local config = {}
 
 config._options = {}
@@ -50,6 +50,7 @@ local defaults = {
 --- Load configurations from file and merge it with current ones.
 ---@private
 local function load_dap_configurations_from_file()
+  ---@diagnostic disable-next-line: undefined-field
   local result = with(open(config.external_config.path), function(f)
     return f:read('*all')
   end)
@@ -58,6 +59,7 @@ local function load_dap_configurations_from_file()
     local ok, c = util.json_decode(result)
     if ok then
       for _, v in pairs(c) do
+        ---@diagnostic disable-next-line: undefined-field
         table.insert(config.dap.configurations, v)
       end
     end
@@ -101,6 +103,7 @@ end
 function config.setup(options)
   config._options = vim.tbl_deep_extend('force', {}, defaults, options or {})
 
+  ---@diagnostic disable-next-line: undefined-field
   if config.external_config.enabled then
     load_dap_configurations_from_file()
   end
