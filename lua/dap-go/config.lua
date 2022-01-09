@@ -50,6 +50,10 @@ local defaults = {
 --- Load configurations from file and merge it with current ones.
 ---@private
 local function load_dap_configurations_from_file()
+  if not vim.fn.filereadable(config.external_config.path) then
+    return
+  end
+
   ---@diagnostic disable-next-line: undefined-field
   local result = with(open(config.external_config.path), function(f)
     return f:read('*all')
