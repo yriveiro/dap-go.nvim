@@ -12,9 +12,10 @@ local job = util.load_module('plenary.job')
 --- of Golang debugging over Delve.
 ---
 --- Getting started with dap-go:
----   1. Put a `require("dap-go").setup() call somewhere in your neovim config.
----   2. Read |dap-go.setup| to check what config keys are available and what you can put inside the setup call
----   3. Profit
+---   1. Run `:checkhealth dap-go` to make sure everything is installed.
+---   2. Put a `require("dap-go").setup() call somewhere in your neovim config.
+---   3. Read |dap-go.setup| to check what config keys are available and what you can put inside the setup call
+---   4. Profit
 ---
 --- <pre>
 --- To find out more:
