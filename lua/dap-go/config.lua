@@ -50,7 +50,7 @@ local defaults = {
 --- Load configurations from file and merge it with current ones.
 ---@private
 local function load_dap_configurations_from_file()
-  if not vim.fn.filereadable(config.external_config.path) then
+  if vim.fn.filereadable(config.external_config.path) == 0 then
     return
   end
 
