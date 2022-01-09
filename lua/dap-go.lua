@@ -21,7 +21,7 @@ local job = util.load_module('plenary.job')
 --- To find out more:
 --- https://github.com/yriveiro/dap-go.nvim
 ---
----   :h dap-go.setup
+--- :h dap-go.setup
 --- </pre>
 ---@brief ]]
 
@@ -114,10 +114,11 @@ end
 --- },
 ---})
 --- </code>
----@param options table: Configuration opts. Keys: external_config, dap
+---@param options table: @Configuration opts. Keys: external_config, dap
 function dapgo.setup(options)
   config.setup(options)
 
+  ---@diagnostic disable-next-line: undefined-field
   dap.configurations.go = config.dap.configurations
   setup_adapter()
 end
