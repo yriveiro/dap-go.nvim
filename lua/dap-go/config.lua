@@ -24,7 +24,10 @@ local defaults = {
     --- Enable external config
     enabled = false,
     --- File with the config definitions.
-    path = require('lspconfig.util').find_git_ancestor(uv.fs_realpath('.')) .. '/dap-go.json',
+    path = (function()
+      local root_dir = require('lspconfig.util').find_git_ancestor(uv.fs_realpath('.')) or '.'
+      return root_dir .. '/dap-go.json'
+    end)(),
   },
 
   --- nvim-dap configuration for go.
@@ -50,6 +53,7 @@ local defaults = {
 --- Load configurations from file and merge it with current ones.
 ---@private
 local function load_dap_configurations_from_file()
+  ---@diagnostic disable-next-line: undefined-field
   if vim.fn.filereadable(config.external_config.path) == 0 then
     return
   end
@@ -80,7 +84,10 @@ end
 ---    --- Enable external config
 ---    enabled = false,
 ---    --- File with the config definitions.
----    path = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.')) .. '/dap-go.json',
+---    path = (function()
+---      local root_dir = require('lspconfig.util').find_git_ancestor(uv.fs_realpath('.')) or '.'
+---      return root_dir .. '/dap-go.json'
+---    end)(),
 ---  },
 ---
 ---  --- nvim-dap configuration for go.
