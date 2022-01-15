@@ -27,7 +27,7 @@ dapgo.setup({options})                                         *dapgo.setup()*
       --- Enable external config
       enabled = false,
       --- File with the config definitions.
-      path = require('dap-go.util').git_root(uv.fs_realpath('.')) .. '/dap-go.json',
+      path = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.')) .. '/dap-go.json',
     },
 
     --- nvim-dap configuration for go.
@@ -86,7 +86,7 @@ config.setup({options})                                       *config.setup()*
        --- Enable external config
        enabled = false,
        --- File with the config definitions.
-       path = require('dap-go.util').git_root(uv.fs_realpath('.')) .. '/dap-go.json',
+       path = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.')) .. '/dap-go.json',
      },
 
      --- nvim-dap configuration for go.
@@ -150,17 +150,6 @@ This class provides common functions used in dap-go extension.
 
 Util                                                                    *Util*
     Collection of utility fuctions.
-
-
-util.git_root({name})                                        *util.git_root()*
-    Gets the git root of the project base on a file from it.
-
-
-    Parameters: ~
-        {name} (string)  Name of the current file to start the search from.
-
-    Return: ~
-        string: Path of the git root.
 
 
 util.json_encode({data})                                  *util.json_encode()*
