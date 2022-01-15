@@ -15,13 +15,6 @@ function util.load_module(name)
   return module
 end
 
---- Gets the git root of the project base on a file from it.
----@param name string: Name of the current file to start the search from.
----@return string: Path of the git root.
-function util.git_root(name)
-  return require('lspconfig.util').root_pattern('.git')(name)
-end
-
 --- Encodes string data to JSON.
 ---@usage
 ---@note borrowed from https://github.com/tjdevries/tree-sitter-lua/blob/master/lua/nlsp/rpc.lua

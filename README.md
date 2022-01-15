@@ -75,7 +75,7 @@ to enable the external config feature.
 require('dap-go').setup({
   external_config = {
     enable = true,
-    path = require('dap-go.util').git_root(vim.loop.fs_realpath('.')) .. '/dap-go.json'
+    path = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.')) .. '/dap-go.json'
   }
 })
 ```
