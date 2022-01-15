@@ -91,7 +91,7 @@ end
 ---   --- Enable external config
 ---   enabled = false,
 ---   --- File with the config definitions.
----   path = require('dap-go.util').git_root(uv.fs_realpath('.')) .. '/dap-go.json',
+---   path = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.')) .. '/dap-go.json',
 --- },
 ---
 --- --- nvim-dap configuration for go.
