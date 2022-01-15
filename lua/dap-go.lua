@@ -91,9 +91,9 @@ end
 ---   --- Enable external config
 ---   enabled = false,
 ---   --- File with the config definitions.
----    path = (function ()
+---    path = (function()
 ---      local root_dir = require('lspconfig.util').find_git_ancestor(uv.fs_realpath('.')) or '.'
----      return  root_dir .. '/dap-go.json'
+---      return root_dir .. '/dap-go.json'
 ---    end)(),
 --- },
 ---
