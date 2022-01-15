@@ -123,4 +123,11 @@ function dapgo.setup(options)
   setup_adapter()
 end
 
+---Reload dap-go module
+---@param options table: @Configuration opts. Keys: external_config, dap
+function dapgo.reload(options)
+  require('plenary.reload').reload_module('dap-go')
+  require('dap-go').setup(options)
+end
+
 return dapgo
