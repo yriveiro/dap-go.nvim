@@ -56,6 +56,14 @@ dapgo.setup({options})                                         *dapgo.setup()*
         {options} (table)  @Configuration opts. Keys: external_config, dap
 
 
+dapgo.reload({options})                                       *dapgo.reload()*
+    Reload dap-go module
+
+
+    Parameters: ~
+        {options} (table)  @Configuration opts. Keys: external_config, dap
+
+
 
 ================================================================================
                                                                  *dap-go.config*
