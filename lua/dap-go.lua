@@ -59,7 +59,7 @@ local function setup_adapter()
     local port = configuration.port or '38697'
     local addr = string.format('%s:%s', host, port)
 
-    if configuration.options.env then
+    if configuration.options and configuration.options.env then
       env.extend(configuration.options.env)
     end
 
