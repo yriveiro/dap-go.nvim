@@ -76,6 +76,8 @@ local function setup_adapter()
       :start()
 
     vim.defer_fn(function()
+      -- I have no idea why this is required, I suspect the firewall or something else?
+      os.execute("sleep " .. tonumber(1))
       cb({ type = 'server', host = host, port = port })
     end, 100)
   end
