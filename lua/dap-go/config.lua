@@ -20,6 +20,7 @@ function mt:__index(k)
 end
 
 local defaults = {
+  delay = 100, -- ms
   external_config = {
     --- Enable external config
     enabled = false,
@@ -80,6 +81,7 @@ end
 --- Usage:
 --- <code>
 --- require('dap-go').setup{
+--- delay = 100, -- ms
 ---  external_config = {
 ---    --- Enable external config
 ---    enabled = false,

@@ -53,7 +53,7 @@ local function on_stderr()
   return function() end
 end
 
-local function setup_adapter()
+local function setup_adapter(delay)
   dap.adapters.go = function(cb, configuration)
     local host = configuration.host or '127.0.0.1'
     local port = configuration.port or '38697'
@@ -76,10 +76,8 @@ local function setup_adapter()
       :start()
 
     vim.defer_fn(function()
-      -- I have no idea why this is required, I suspect the firewall or something else?
-      os.execute("sleep " .. tonumber(1))
       cb({ type = 'server', host = host, port = port })
-    end, 100)
+    end, delay)
   end
 end
 
@@ -89,6 +87,7 @@ end
 --- Usage:
 --- <code>
 --- require('dap-go').setup({
+--- delay = 100, -- ms
 --- external_config = {
 ---   --- Enable external config
 ---   enabled = false,
@@ -125,7 +124,7 @@ function dapgo.setup(options)
 
   ---@diagnostic disable-next-line: undefined-field
   dap.configurations.go = config.dap.configurations
-  setup_adapter()
+  setup_adapter(options.delay)
 end
 
 ---Reload dap-go module
