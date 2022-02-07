@@ -23,6 +23,7 @@ dapgo.setup({options})                                         *dapgo.setup()*
     Usage:
     >
     require('dap-go').setup({
+    delay = 100 -- in ms, how much time to wait before connecting to dlv
     external_config = {
       --- Enable external config
       enabled = false,
@@ -85,6 +86,7 @@ config.setup({options})                                       *config.setup()*
     Usage:
     >
     require('dap-go').setup{
+    delay = 100 -- in ms, how much time to wait before connecting to dlv
      external_config = {
        --- Enable external config
        enabled = false,

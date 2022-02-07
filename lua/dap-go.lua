@@ -53,13 +53,13 @@ local function on_stderr()
   return function() end
 end
 
-local function setup_adapter()
+local function setup_adapter(delay)
   dap.adapters.go = function(cb, configuration)
     local host = configuration.host or '127.0.0.1'
     local port = configuration.port or '38697'
     local addr = string.format('%s:%s', host, port)
 
-    if configuration.options.env then
+    if configuration.options and configuration.options.env then
       env.extend(configuration.options.env)
     end
 
@@ -77,7 +77,7 @@ local function setup_adapter()
 
     vim.defer_fn(function()
       cb({ type = 'server', host = host, port = port })
-    end, 100)
+    end, delay)
   end
 end
 
@@ -87,6 +87,7 @@ end
 --- Usage:
 --- <code>
 --- require('dap-go').setup({
+--- delay = 100, -- ms
 --- external_config = {
 ---   --- Enable external config
 ---   enabled = false,
@@ -123,7 +124,7 @@ function dapgo.setup(options)
 
   ---@diagnostic disable-next-line: undefined-field
   dap.configurations.go = config.dap.configurations
-  setup_adapter()
+  setup_adapter(options.delay)
 end
 
 ---Reload dap-go module
