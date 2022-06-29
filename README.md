@@ -32,7 +32,7 @@ This section should guide you on how to add the extention to `nvim-dap`.
 * [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) for all the stuff I don't want to write twice.
 * [Delve](https://github.com/go-delve/delve)
 
-### Suggested Dependencies
+### Suggested Dependencies  
 
 * [telescope-dap](https://github.com/nvim-telescope/telescope-dap.nvim) to browse the `dap` configurations.
 * [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) for more user friendly DAP user interface.
@@ -68,20 +68,25 @@ use {
 require('dap-go').setup()
 ```
 
+### Default options
+
+See [config.lua](./lua/dap-go/config.lua?plain=1#L22-L52)
+
+### Custom Configurations
+
 If you want to use a json file to hold configurations for the debugger you need
 to enable the external config feature.
 
 ```lua
 require('dap-go').setup({
   external_config = {
-    enable = true,
-    path = require('lspconfig.util').find_git_ancestor(vim.loop.fs_realpath('.')) .. '/dap-go.json'
+    enabled = true,
   }
 })
 ```
-
-An example of the `dap-go.json` file.
-
+ 
+An example of the `dap-go.json` file. This file can be used for custom configurations. 
+The default path to search for is the current directory or git (if the current project is using git) root.
 ```json
 {
   "Custom config": {
