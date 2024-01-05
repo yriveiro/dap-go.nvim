@@ -1,14 +1,12 @@
 # Cherry picked from https://github.com/nvim-telescope/telescope.nvim/blob/master/.github/workflows/lint.yml
 name: Linting and style checking
-
 on: [push, pull_request]
-
 jobs:
   luacheck:
     name: Luacheck
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Prepare
         run: |
           sudo apt-get update
@@ -18,10 +16,10 @@ jobs:
         run: sudo make lint
   stylua:
     name: stylua
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: JohnnyMorganz/stylua-action@1.0.0
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # CLI arguments
