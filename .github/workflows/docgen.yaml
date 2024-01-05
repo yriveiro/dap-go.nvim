@@ -34,6 +34,11 @@ jobs:
           git clone --depth 1 https://github.com/neovim/nvim-lspconfig ~/.local/share/nvim/site/pack/vendor/start/nvim-lspconfig
           git clone --depth 1 https://github.com/mfussenegger/nvim-dap ~/.local/share/nvim/site/pack/vendor/start/nvim-dap
           ln -s $(pwd) ~/.local/share/nvim/site/pack/vendor/start
+      - name: Tree Sitter Cli
+      - uses: actions-rs/install@v0.1
+        with:
+          crate: tree-sitter-cli
+          version: latest
       - name: Build parser
         run: |
           # We have to build the parser every single time to keep up with parser changes
