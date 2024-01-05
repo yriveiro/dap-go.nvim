@@ -1,11 +1,9 @@
 # Cherry picked from https://github.com/nvim-telescope/telescope.nvim/blob/master/.github/workflows/docgen.yml
 name: Generate docs
-
 on:
   push:
     branches-ignore:
       - master
-
 jobs:
   build-sources:
     name: Generate docs
@@ -14,17 +12,16 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-latest
             url: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: date +%F > todays-date
       - name: Restore cache for today's nightly.
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _neovim
           key: ${{ runner.os }}-${{ matrix.url }}-${{ hashFiles('todays-date') }}
-
       - name: Prepare
         run: |
           test -d _neovim || {
