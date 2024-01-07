@@ -1,16 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-HERE="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+HERE="$(dirname "$(realpath "$0")")"
+MINIMAL_TEST="scripts/minimal_init.lua"
+
 cd $HERE/..
 
 run() {
-    nvim --headless --noplugin -u scripts/minimal_init.lua \
-        -c "PlenaryBustedDirectory $1 { minimal_init = './scripts/minimal_init.lua' }"
+  nvim --headless --noplugin -u "${MINIMAL_TEST}" \
+    -c "PlenaryBustedDirectory $1 { minimal_init = './${MINIMAL_TEST}' }"
 }
 
-if [[ $2 = '--summary' ]]; then
-    ## really simple results summary by filtering plenary busted output
-    run tests/$1  2> /dev/null | grep -E '^\S*(Success|Fail(ed)?|Errors?)\s*:'
-else
-    run tests/$1
-fi
+case "$2" in
+'--summary')
+  run tests/$1 2>/dev/null | grep -E '^\S*(Success|Fail(ed)?|Errors?)\s*:'
+  ;;
+*)
+  run tests/$1
+  ;;
+esac

@@ -1,7 +1,7 @@
 vim.cmd([[set runtimepath+=.]])
-vim.cmd([[set rtp+=~/.local/share/nvim/site/pack/vendor/star/plenary.nvim/]])
-vim.cmd([[set rtp+=~/.local/share/nvim/site/pack/vendor/star/nvim-dap]])
-vim.cmd([[set rtp+=~/.local/share/nvim/site/pack/vendor/star/nvim-lspconfig]])
+vim.cmd([[set rtp+=/nvim/plugins/plenary.nvim]])
+vim.cmd([[set rtp+=/nvim/plugins/nvim-dap]])
+vim.cmd([[set rtp+=/nvim/plugins/nvim-lspconfig]])
 
 vim.cmd([[runtime! plugin/plenary.vim]])
 vim.cmd([[runtime! plugin/nvim-dap.vim]])
