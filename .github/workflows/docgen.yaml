@@ -15,8 +15,10 @@ jobs:
           - os: ubuntu-latest
             url: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     steps:
-      - uses: actions/checkout@v4
-      - run: date +%F > todays-date
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Todays Data
+        run: date +%F > todays-date
       - name: Restore cache for today's nightly.
         uses: actions/cache@v3
         with:
@@ -35,7 +37,7 @@ jobs:
           git clone --depth 1 https://github.com/mfussenegger/nvim-dap ~/.local/share/nvim/site/pack/vendor/start/nvim-dap
           ln -s $(pwd) ~/.local/share/nvim/site/pack/vendor/start
       - name: Tree Sitter Cli
-      - uses: actions-rs/install@v0.1
+        uses: actions-rs/install@v0.1
         with:
           crate: tree-sitter-cli
           version: latest

@@ -1,5 +1,5 @@
 ================================================================================
-                                                                   *dap-go.nvim*
+NVIM                                                               *dap-go.nvim*
 
 dap-go.nvim is an extension for `nvim-dap` plugin that configures the usage of
 Golang debugging over Delve.
@@ -70,7 +70,7 @@ dapgo.reload({options})                                       *dapgo.reload()*
 
 
 ================================================================================
-                                                                 *dap-go.config*
+CONFIG                                                           *dap-go.config*
 
 Config holds all the configuration to operate the extension.
 
@@ -125,7 +125,7 @@ config.setup({options})                                       *config.setup()*
 
 
 ================================================================================
-                                                                    *dap-go.env*
+ENV                                                                 *dap-go.env*
 
 This class wraps the `vim.fn.environ` with some functionalities and
 validations.
@@ -152,7 +152,7 @@ env.dump()                                                        *env.dump()*
 
 
 ================================================================================
-                                                                   *dap-go.util*
+UTIL                                                               *dap-go.util*
 
 This class provides common functions used in dap-go extension.
 
